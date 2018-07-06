@@ -1,0 +1,26 @@
+{
+  "name": "gopass-to-devcenter-connections",
+  "version": "0.0.1",
+  "description": "Generate Datastax DevCenter connection list out of a gopass password store",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "gopass",
+    "Cassandra",
+    "Datastax",
+    "DevCenter"
+  ],
+  "author": "Jonas Verhoelen <jverhoelen@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "base-64": "0.1.0",
+    "commander": "2.16.0",
+    "flatmap": "0.0.3"
+  },
+  "devDependencies": {
+    "mocha": "5.2.0",
+    "proxyquire": "2.0.1",
+    "sinon": "6.1.2"
+  }
+}
