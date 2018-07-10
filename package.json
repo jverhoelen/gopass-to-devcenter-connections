@@ -16,7 +16,8 @@
   "dependencies": {
     "base-64": "0.1.0",
     "commander": "2.16.0",
-    "flatmap": "0.0.3"
+    "flatmap": "0.0.3",
+    "js2xmlparser": "3.0.0"
   },
   "devDependencies": {
     "mocha": "5.2.0",

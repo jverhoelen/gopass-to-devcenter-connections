@@ -1,13 +1,13 @@
 const assert = require('assert')
 const sinon = require('sinon')
-const Gopass = require('../gopass')
+const Gopass = require('../Gopass')
 
 beforeEach(() => {
     gopass = new Gopass()
 })
 
-describe('gopass', () => {
-    /*it('should be able to build an instance and verify with available gopass command', async () => {
+describe('Gopass', () => {
+    it('should be able to build an instance and verify with available gopass command', async () => {
         const verified = await gopass.verifyInstallation()
         assert.equal(verified, true)
     })
@@ -19,5 +19,5 @@ describe('gopass', () => {
 
     it('should be able to sync', async () => {
         gopass.sync()
-    })*/
+    })
 })

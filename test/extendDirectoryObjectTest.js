@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-const buildDirectoryObject = require('../buildDirectoryObject')
+const buildDirectoryObject = require('../extendDirectoryObject')
 
 describe('buildDirectoryObject', () => {
     it('should create the folders', () => {

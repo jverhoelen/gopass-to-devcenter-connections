@@ -1,4 +1,4 @@
-const buildDirectoryObject = (directory, folderPathArray) => {
+const extendDirectoryObject = (directory, folderPathArray) => {
     for (let i = 0; i < folderPathArray.length; i++) {
         const previousFolders =  i == 0 ? [] : folderPathArray.slice(0, i)
         
@@ -16,4 +16,4 @@ const buildDirectoryObject = (directory, folderPathArray) => {
     return directory
 }
 
-module.exports = buildDirectoryObject
+module.exports = extendDirectoryObject
