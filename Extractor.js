@@ -1,4 +1,4 @@
-const Gopass = require('./gopass')
+const Gopass = require('./Gopass')
 const flatMap = require('flatmap')
 const extendDirectoryObject = require('./extendDirectoryObject')
 const { encode } = require('base-64')
