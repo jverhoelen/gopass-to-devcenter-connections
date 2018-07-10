@@ -38,3 +38,4 @@ class Gopass {
 }
 
 module.exports = Gopass
+
