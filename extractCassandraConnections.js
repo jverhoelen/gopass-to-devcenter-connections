@@ -1,7 +1,8 @@
 const Gopass = require('./gopass')
 const gopass = new Gopass()
 const flatMap = require('flatmap')
-const { encode } = require('base-64');
+const buildDirectoryObject = require('./buildDirectoryObject')
+const { encode } = require('base-64')
 
 const config = {
     requiredDetails: ['username', 'password', 'nodes'],
@@ -15,15 +16,15 @@ class Extractor {
         return secrets.filter(secret => {
             const segments = secret.split('/')
 
-            return segments[1] === config.prefix &&
-                segments.length === 5 &&
+            return segments[1] == config.prefix &&
+                segments.length == 5 &&
                 config.environments.includes(segments[2]) &&
                 config.requiredDetails.includes(segments[4])
         })
     }
 
     static async buildDirectoryStructure(cassandraSecrets) {
-        const directoryStructure = {}
+        let directoryStructure = {}
 
         for (const secret of cassandraSecrets) {
             const segments = secret.split('/')
@@ -32,15 +33,8 @@ class Extractor {
             const purpose = segments[3]
             const detail = segments[4]
 
-            if (!directoryStructure[storeRoot]) {
-                directoryStructure[storeRoot] = {}
-            }
-            if (!directoryStructure[storeRoot][env]) {
-                directoryStructure[storeRoot][env] = {}
-            }
-            if (!directoryStructure[storeRoot][env][purpose]) {
-                directoryStructure[storeRoot][env][purpose] = {}
-            }
+            console.log(secret)
+            directoryStructure = buildDirectoryObject(directoryStructure, [ storeRoot, env, purpose, detail ])
             directoryStructure[storeRoot][env][purpose][detail] = await gopass.show(secret)
         }
 
@@ -69,25 +63,22 @@ class Extractor {
     }
 
     static formatConnections(connections) {
-        return connections.map(connection => {
-
-            return {
-                name: connection.name,
-                hosts: connection.nodes.split(','),
-                port: 9042,
-                compression: 'SNAPPY',
-                storePassword: false,
-                requiresCredentials: true,
-                login: connection.username,
-                encryptedPassword: encode(connection.password),
-                ssl: false,
-                truststorePath: '',
-                encryptedTruststorePassword: '',
-                requiresClientAuthentication: false,
-                keystorePath: '',
-                encryptedKeystorePassword: ''
-            }
-        })
+        return connections.map(connection => ({
+            name: connection.name,
+            hosts: connection.nodes.split(','),
+            port: 9042,
+            compression: 'SNAPPY',
+            storePassword: false,
+            requiresCredentials: true,
+            login: connection.username,
+            encryptedPassword: encode(connection.password),
+            ssl: false,
+            truststorePath: '',
+            encryptedTruststorePassword: '',
+            requiresClientAuthentication: false,
+            keystorePath: '',
+            encryptedKeystorePassword: ''
+        }))
     }
 }
 
